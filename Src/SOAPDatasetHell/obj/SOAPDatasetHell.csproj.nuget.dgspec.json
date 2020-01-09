@@ -1,0 +1,62 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\SOAPDatasetHell.csproj": {}
+  },
+  "projects": {
+    "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\SOAPDatasetHell.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\SOAPDatasetHell.csproj",
+        "projectName": "SOAPDatasetHell",
+        "projectPath": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\SOAPDatasetHell.csproj",
+        "packagesPath": "C:\\Users\\Anderson.Ribeiro\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Anderson.Ribeiro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
