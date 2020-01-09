@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SOAPDatasetHell</name>
+    </assembly>
+    <members>
+        <member name="M:SOAPDatasetHell.SoapToDatasetClient.GetSoapResponse">
+            <summary>
+            Call SOAP Endpoint
+            </summary>
+            <returns>XML Response</returns>
+        </member>
+        <member name="M:SOAPDatasetHell.SoapToDatasetClient.GetDataSet">
+            <summary>
+            Call SOAP endpoint and convert result into a DataSet.
+            </summary>
+            <returns>Dataset</returns>
+        </member>
+    </members>
+</doc>
