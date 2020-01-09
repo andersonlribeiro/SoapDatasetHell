@@ -2,11 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Anderson Ribeiro</Authors>
+    <Company>Anderson Ribeiro</Company>
+    <PackageProjectUrl>https://github.com/andersonlribeiro/SoapDatasetHell</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/andersonlribeiro/SoapDatasetHell</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>dataset soap</PackageTags>
+    <PackageReleaseNotes>Pre Version</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Convert a legacy SOAP Webservice Dataset Result into a DataSet in .Net Core Framework.
+
+In the recent past, software engineers used to share datasets and datatables throught SOAP Webservices. Althought this is considered a bad practice nowadays, we need to deal with legacy XML Soap Webservices wich retrieves Datasets and Datatables. In .Net Core, there isn't a easy way to transform a XML Soap Webservice result to a DataSet. 
+
+This package is the most easy way and intend to eliminate headaches working with a legacy SOAP Webservices wich retrieves DataSets in XML format.
+
+</Description>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <AssemblyName>dev.andersonribeiro.SOAPDatasetHell</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\Build\</OutputPath>
-    <DocumentationFile>..\..\Build\SOAPDatasetHell.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
 </Project>

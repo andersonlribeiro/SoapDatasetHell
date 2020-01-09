@@ -187,7 +187,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\SOAPDatasetHell.csproj",
-      "projectName": "SOAPDatasetHell",
+      "projectName": "dev.andersonribeiro.SOAPDatasetHell",
       "projectPath": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\SOAPDatasetHell.csproj",
       "packagesPath": "C:\\Users\\Anderson.Ribeiro\\.nuget\\packages\\",
       "outputPath": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\obj\\",
