@@ -10,6 +10,7 @@ After, call SoapToDatasetClient.GetDataSet() to retrieve Dataset from WCF Webser
 
 Something like this:
 
+```csharp
 SoapToDatasetClient soapClient = new SoapToDatasetClient("http://wssupplier/wsPortal/ws_listPriority.asmx");
 soapClient.Credentials = new NetworkCredential("username", "password");
 soapClient.NameSpaces.Add(@"xmlns:ran=""http://www.ranger.com/""");
@@ -20,3 +21,4 @@ soapClient.SoapBody = $@"
 </ran:in_Param>
 </ran:WS_WS_Priority_Call>"
 DataSet dataSet = await soapClient.GetDataSet();
+```
