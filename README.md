@@ -1,4 +1,27 @@
 
+# SoapDatasetHell - converts legacy WCF SOAP Dataset into a Dataset object.
+
+
+### Nuget
+
+| | |
+|-|-|
+| downloads | ![](https://img.shields.io/nuget/dt/dev.andersonribeiro.SOAPDatasetHell) |
+| stable | ![Nuget](https://img.shields.io/nuget/v/dev.andersonribeiro.SOAPDatasetHell) |
+
+### Get help
+
+[![Gitter](https://badges.gitter.im/SoapDatasetHell/community.svg)](https://gitter.im/SoapDatasetHell/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+ 
+Follow me on Twitter: [@andersonribeiro][1]
+
+### License: Apache License 2.0
+  
+  [1]: https://twitter.com/andersonribeiro
+
+### How to use
+
 Create an instance of SoapToDatasetClient and set properties:
 
     Credentials, if aplicable:
