@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 // Copyright (c) 2019 Anderson Ribeiro
 //
 // Permission is hereby granted, free of charge, to any person
@@ -36,20 +36,20 @@ using System.Xml.Linq;
 
 namespace SOAPDatasetHell
 {
-    [Obsolete("Use new class SoapToDataSet")]
-    public class SoapToDatasetClient{
+    public class SoapToDataSet
+    {
         readonly Uri SoapEndpoint;
-        public List<string> NameSpaces { get; set; }
+        public List<string> NameSpaces { get; set; } = new List<string>();
         public string SoapBody { get; set; }
-        public  NetworkCredential Credentials { get; set; } = null;
+        public NetworkCredential Credentials { get; set; } = null;
 
-        public SoapToDatasetClient(string soapEndpoint){
-            this.SoapEndpoint = new Uri(soapEndpoint);
-            this.NameSpaces = new List<string>();
-        }
+        /// <sumary>
+        /// Sets the BaseUrl property for requests made by this client instance.
+        public SoapToDataSet(Uri soapEndpoint) => SoapEndpoint = soapEndpoint;
 
-        
-        XmlDocument createSoapEnvelope(){
+
+        XmlDocument createSoapEnvelope()
+        {
             validateParams();
 
             StringBuilder xmlContent = new StringBuilder();
@@ -59,7 +59,7 @@ namespace SOAPDatasetHell
 
             foreach (var nameSpace in NameSpaces)
             {
-                 xmlContent.AppendLine(nameSpace);
+                xmlContent.AppendLine(nameSpace);
             }
 
             xmlContent.Append(@">");
@@ -75,7 +75,8 @@ namespace SOAPDatasetHell
             return soapEnvelopXml;
         }
 
-        void validateParams(){
+        void validateParams()
+        {
             if (string.IsNullOrEmpty(this.SoapBody))
             {
                 throw new ArgumentNullException("Body is missed.");
@@ -91,21 +92,23 @@ namespace SOAPDatasetHell
         }
 
         HttpWebRequest CreateWebRequest()
-		{
-			HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(this.SoapEndpoint);	
+        {
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(this.SoapEndpoint);
 
-			webRequest.ContentType = "text/xml; encoding='utf-8'";
-			webRequest.Accept = "text/xml";
-			webRequest.Method = "POST";
+            webRequest.ContentType = "text/xml; encoding='utf-8'";
+            webRequest.Accept = "text/xml";
+            webRequest.Method = "POST";
 
-            if ( this.Credentials != null){
-                    webRequest.Credentials = this.Credentials;
+            if (this.Credentials != null)
+            {
+                webRequest.Credentials = this.Credentials;
             }
 
-			return webRequest;
-		} 
+            return webRequest;
+        }
 
-        async Task InsertSoapEnvelopIntoWebRequestAsync(XmlDocument envelop, WebRequest webRequest){
+        async Task InsertSoapEnvelopIntoWebRequestAsync(XmlDocument envelop, WebRequest webRequest)
+        {
             byte[] bytes = Encoding.ASCII.GetBytes(envelop.OuterXml);
             webRequest.ContentLength = bytes.Length;
             using (Stream stream = await webRequest.GetRequestStreamAsync())
@@ -114,17 +117,28 @@ namespace SOAPDatasetHell
             }
         }
 
+        void InsertSoapEnvelopIntoWebRequest(XmlDocument envelop, WebRequest webRequest)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(envelop.OuterXml);
+            webRequest.ContentLength = bytes.Length;
+            using (Stream stream = webRequest.GetRequestStream())
+            {
+                stream.Write(bytes, 0, bytes.Length);
+            }
+        }
+
+
         /// <summary>
-        /// Call SOAP Endpoint
+        /// Make a request to WCF SOAP URL in asynchronous way.
         /// </summary>
-        /// <returns>XML Response</returns>
-        public async Task<XElement> GetSoapResponse()
+        /// <returns>A XElement</returns>
+        public async Task<XElement> GetSoapResponseAsync()
         {
             XmlDocument soapEnvelopXml = createSoapEnvelope();
             HttpWebRequest webRequest = CreateWebRequest();
             await InsertSoapEnvelopIntoWebRequestAsync(soapEnvelopXml, webRequest);
             string soapResult = string.Empty;
-            using (HttpWebResponse response = (HttpWebResponse) await webRequest.GetResponseAsync())
+            using (HttpWebResponse response = (HttpWebResponse)await webRequest.GetResponseAsync())
             {
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
@@ -140,19 +154,44 @@ namespace SOAPDatasetHell
         }
 
         /// <summary>
-        /// Call SOAP endpoint and convert result into a DataSet.
+        /// Make a request to WCF SOAP URL in synchronous way.
         /// </summary>
-        /// <returns>Dataset</returns>
-        public async Task<DataSet> GetDataSet()
+        /// <returns>A XElement</returns>
+        public XElement GetSoapResponse()
         {
-            var document = await this.GetSoapResponse();
+            XmlDocument soapEnvelopXml = createSoapEnvelope();
+            HttpWebRequest webRequest = CreateWebRequest();
+            InsertSoapEnvelopIntoWebRequest(soapEnvelopXml, webRequest);
+            string soapResult = string.Empty;
+            using (HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse())
+            {
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    using (StreamReader rd = new StreamReader(response.GetResponseStream()))
+                    {
+                        soapResult = rd.ReadToEnd();
+                    }
+                }
+            }
+
+            XElement document = XElement.Load(new StringReader(soapResult));
+            return document;
+        }
+
+        /// <summary>
+        /// Converts a Diffgram into a DataSet
+        /// </summary>
+        /// <param name="diffgram">A Diffgram: DataSet schema and data represented in XML.</param>
+        /// <returns>A System.Data.DataSet</returns>
+        public DataSet ExtractDataSet(XElement diffgram)
+        {
             DataSet dataSet = new DataSet();
-            dataSet.ReadXml(new StringReader(document.ToString()), XmlReadMode.ReadSchema);
+            dataSet.ReadXml(new StringReader(diffgram.Value), XmlReadMode.ReadSchema);
             dataSet.AcceptChanges();
             return dataSet;
         }
 
-        
+
     }
 
 

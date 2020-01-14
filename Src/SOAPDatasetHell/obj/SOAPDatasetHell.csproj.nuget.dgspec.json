@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\SOAPDatasetHell.csproj",
-        "projectName": "SOAPDatasetHell",
+        "projectName": "dev.andersonribeiro.SOAPDatasetHell",
         "projectPath": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\SOAPDatasetHell.csproj",
         "packagesPath": "C:\\Users\\Anderson.Ribeiro\\.nuget\\packages\\",
         "outputPath": "C:\\projects\\SOAPDatasetHell\\Src\\SOAPDatasetHell\\obj\\",
@@ -51,10 +51,16 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
