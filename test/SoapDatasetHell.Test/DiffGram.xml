@@ -1,0 +1,68 @@
+﻿<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <soap:Body>
+      <WS_PokemonCharacters_CallResponse xmlns="https://www.pokemon.co.jp/">
+         <WS_PokemonCharacters_CallResult>
+            <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+               <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+                  <xs:complexType>
+                     <xs:choice minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="Table">
+                           <xs:complexType>
+                              <xs:sequence>
+                                 <xs:element name="CODE" type="xs:int" minOccurs="0"/>
+                                 <xs:element name="DESCRIPTION" type="xs:string" minOccurs="0"/>
+                              </xs:sequence>
+                           </xs:complexType>
+                        </xs:element>
+                     </xs:choice>
+                  </xs:complexType>
+               </xs:element>
+            </xs:schema>
+            <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+               <NewDataSet xmlns="">
+                  <Table diffgr:id="0" msdata:rowOrder="0">
+                     <CODE>1</CODE>
+                     <DESCRIPTION>Hakuna</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="1" msdata:rowOrder="1">
+                     <CODE>2</CODE>
+                     <DESCRIPTION>Beedrill</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="2" msdata:rowOrder="2">
+                     <CODE>3</CODE>
+                     <DESCRIPTION>Bulbasaur</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="3" msdata:rowOrder="3">
+                     <CODE>4</CODE>
+                     <DESCRIPTION>Ivysaur</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="4" msdata:rowOrder="4">
+                     <CODE>5</CODE>
+                     <DESCRIPTION>Venusaur</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="5" msdata:rowOrder="5">
+                     <CODE>6</CODE>
+                     <DESCRIPTION>Charmander</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="6" msdata:rowOrder="6">
+                     <CODE>7</CODE>
+                     <DESCRIPTION>Charmeleon</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="7" msdata:rowOrder="7">
+                     <CODE>8</CODE>
+                     <DESCRIPTION>Charizard</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="8" msdata:rowOrder="8">
+                     <CODE>9</CODE>
+                     <DESCRIPTION>Squirtle</DESCRIPTION>
+                  </Table>
+                  <Table diffgr:id="9" msdata:rowOrder="9">
+                     <CODE>10</CODE>
+                     <DESCRIPTION>Wartortle</DESCRIPTION>
+                  </Table>
+               </NewDataSet>
+            </diffgr:diffgram>
+         </WS_PokemonCharacters_CallResult>
+      </WS_PokemonCharacters_CallResponse>
+   </soap:Body>
+</soap:Envelope>

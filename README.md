@@ -1,5 +1,11 @@
 
-# SoapDatasetHell - converts legacy WCF SOAP Dataset into a Dataset object.
+# SoapDatasetHell
+
+Software engineers used to share datasets throught WCF Webservices. Nowadays, it's not a good practice, but, there are many serivces written in this way.
+
+In .Net Core, there isn't an easy way to read these legacy datasets.
+
+This lib get XML result and converts it into a DataSet object.
 
 
 ### Nuget
@@ -7,7 +13,7 @@
 | | |
 |-|-|
 | downloads | ![](https://img.shields.io/nuget/dt/dev.andersonribeiro.SOAPDatasetHell) |
-| stable | ![Nuget](https://img.shields.io/nuget/v/dev.andersonribeiro.SOAPDatasetHell) |
+| stable | [![Nuget](https://img.shields.io/nuget/v/dev.andersonribeiro.SOAPDatasetHell)](https://www.nuget.org/packages/dev.andersonribeiro.SOAPDatasetHell) |
 
 ### Get help
 
@@ -16,18 +22,27 @@
  
 Follow me on Twitter: [@andersonribeiro][1]
 
-### License: Apache License 2.0
-  
   [1]: https://twitter.com/andersonribeiro
 
-### How to use
+# Install with nuget
+
+```
+Install-Package dev.andersonribeiro.SOAPDatasetHell -Version 1.0.0
+```
+
+# Install with .NET CLI
+```
+dotnet add package dev.andersonribeiro.SOAPDatasetHell --version 1.0.0
+```
+
+# How to use
 
 Create an instance of SoapToDatasetClient and set properties:
 
-    Credentials, if aplicable:
-    SOAP Endpoint URL
-    SOAP Namespaces ( Mandatory )
-    SOAP Body ( Mandatory )
+    * Credentials;
+    * SOAP Endpoint URL;
+    * SOAP Namespaces;
+    * SOAP Body;
 
 After, call SoapToDatasetClient.GetDataSet() to retrieve Dataset from WCF Webservice.
 

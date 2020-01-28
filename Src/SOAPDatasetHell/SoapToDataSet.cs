@@ -38,20 +38,47 @@ namespace SOAPDatasetHell
 {
     public class SoapToDataSet
     {
-        readonly Uri SoapEndpoint;
-        public List<string> NameSpaces { get; set; } = new List<string>();
-        public string SoapBody { get; set; }
-        public NetworkCredential Credentials { get; set; } = null;
 
-        /// <sumary>
-        /// Sets the BaseUrl property for requests made by this client instance.
-        public SoapToDataSet(Uri soapEndpoint) => SoapEndpoint = soapEndpoint;
+        public Uri SoapEndpoint { get; private set; }
+        public List<string> NameSpaces { get; private set; }
+        public string SoapBody { get; private set; }
+        public NetworkCredential Credentials { get; private set; } = null;
+
+        public SoapToDataSet()
+        {
+            this.NameSpaces = new List<string>();
+        }
 
 
+        public SoapToDataSet(Uri soapEndpoint) : this() => SoapEndpoint = soapEndpoint;
+       
+        
+        public void AddNamespace(string soapNamespace)
+        {
+            if (NameSpaces.IndexOf(soapNamespace) > -1) throw new ArgumentException("Namespace already exists ");
+            NameSpaces.Add(soapNamespace);
+        }
+
+        public void AddNamespaces(IList<string> soapNamespaces)
+        {
+            if (soapNamespaces == null || soapNamespaces.Count == 0 ) throw new ArgumentNullException($"Invalid argument  {nameof(soapNamespaces)}");
+            NameSpaces.AddRange(soapNamespaces);
+        }
+
+        public void RemoveNamespace(string soapNamespace)
+        {
+            if (NameSpaces.IndexOf(soapNamespace) > -1) throw new ArgumentException("Namespace not exists ");
+            NameSpaces.Remove(soapNamespace);
+        }
+
+        public void SetCredential(NetworkCredential credential) => Credentials = credential;
+     
+        public void SetSoapEndpoint(Uri soapEndpoint) => SoapEndpoint = soapEndpoint;
+               
+        public void SetSoapBody(string soapBody) => SoapBody = soapBody;
+      
         XmlDocument createSoapEnvelope()
         {
-            validateParams();
-
             StringBuilder xmlContent = new StringBuilder();
             xmlContent.AppendLine(@"<?xml version=""1.0""?>");
             xmlContent.AppendLine(@"<soap:Envelope");
@@ -61,7 +88,6 @@ namespace SOAPDatasetHell
             {
                 xmlContent.AppendLine(nameSpace);
             }
-
             xmlContent.Append(@">");
             xmlContent.AppendLine(@"<soap:Header>");
             xmlContent.AppendLine(@"</soap:Header>");
@@ -75,25 +101,10 @@ namespace SOAPDatasetHell
             return soapEnvelopXml;
         }
 
-        void validateParams()
-        {
-            if (string.IsNullOrEmpty(this.SoapBody))
-            {
-                throw new ArgumentNullException("Body is missed.");
-            }
-            if (string.IsNullOrEmpty(this.SoapEndpoint.ToString()))
-            {
-                throw new ArgumentNullException("SOAP endpoint is missed.");
-            }
-            if (string.IsNullOrEmpty(this.SoapEndpoint.ToString()))
-            {
-                throw new ArgumentNullException("SOAP namespaces is missed.");
-            }
-        }
-
+       
         HttpWebRequest CreateWebRequest()
         {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(this.SoapEndpoint);
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(SoapEndpoint);
 
             webRequest.ContentType = "text/xml; encoding='utf-8'";
             webRequest.Accept = "text/xml";
@@ -186,7 +197,7 @@ namespace SOAPDatasetHell
         public DataSet ExtractDataSet(XElement diffgram)
         {
             DataSet dataSet = new DataSet();
-            dataSet.ReadXml(new StringReader(diffgram.Value), XmlReadMode.ReadSchema);
+            dataSet.ReadXml(new StringReader(diffgram.ToString()), XmlReadMode.ReadSchema);
             dataSet.AcceptChanges();
             return dataSet;
         }
